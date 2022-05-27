@@ -10,7 +10,8 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
+The page will reload if you make edits. Currently no backend is connected yet - so all mechanisms are browser side. Backend implementation is in progress.<br>
+
 
 ### `yarn build` (or `npm run build` for npm users)
 
