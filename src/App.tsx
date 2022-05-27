@@ -1,6 +1,4 @@
-import {
-  Accessor, Component, createSignal, Show,
-} from 'solid-js';
+import { Accessor, Component, createSignal, Show } from 'solid-js';
 import clsx from 'clsx';
 
 import { DifficultiesValue } from './utils';
@@ -14,7 +12,7 @@ const container = clsx(
   'h-screen',
   'bg-palette-b',
   'flex',
-  'flex-col',
+  'flex-col'
 );
 
 const App: Component = () => {
@@ -44,6 +42,7 @@ const App: Component = () => {
           <GameOverModal
             score={score}
             setDifficulty={setDifficulty}
+            setScore={setScore}
             setTries={setTries}
           />
         </Show>

@@ -13,7 +13,7 @@ const introWrapper = clsx(
   'rounded-lg',
   'flex-col',
   'items-center',
-  'justify-center',
+  'justify-center'
 );
 
 interface PropsType {
@@ -23,16 +23,19 @@ interface PropsType {
 const Intro: Component<PropsType> = (props) => (
   <main class={container}>
     <section class={introWrapper}>
-      <p>Choose your difficulty</p>
+      <h1>Welcome to Hit The Frog(beta)!</h1>
+      <h2>Choose your difficulty</h2>
       <select
+        value={undefined}
         onChange={(e) => {
           props.setDifficulty(
             difficulties[
-              (e.target as EventTarget & HTMLSelectElement).selectedIndex
-            ].value,
+              (e.target as EventTarget & HTMLSelectElement).selectedIndex - 1
+            ].value
           );
         }}
       >
+        <option style="display:none" />
         <For each={difficulties}>
           {(difficulty) => (
             <option value={difficulty.value}>{difficulty.label}</option>

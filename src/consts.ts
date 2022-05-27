@@ -1,1 +1,1 @@
-export const AMOUNT_OF_TRIES = 2;
+export const AMOUNT_OF_TRIES = 10;

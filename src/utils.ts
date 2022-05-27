@@ -1,4 +1,4 @@
-export const tiles = new Array(9).fill(null).map((_, i) => i + 1);
+export const tiles = new Array(9).fill(null).map((_, i) => i);
 
 type ArrayElement<ArrayType extends readonly unknown[]> =
   ArrayType extends readonly (infer ElementType)[] ? ElementType : never;

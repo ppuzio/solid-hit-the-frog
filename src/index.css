@@ -16,6 +16,16 @@ body {
   height: 100%;
 }
 
+h1 {
+  line-height: 32px;
+  font-size: 24px;
+}
+
+h2 {
+  line-height: 24px;
+  font-size: 20px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
