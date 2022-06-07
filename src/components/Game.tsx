@@ -5,42 +5,20 @@ import {
   createSignal,
   Index,
   onCleanup,
-  Setter,
 } from 'solid-js';
 
 import clsx from 'clsx';
-import { difficulties, DifficultiesValue, rechargeTime, tiles } from './utils';
-import { AMOUNT_OF_TRIES } from './consts';
-import useWindowSize from './useWindowSize';
-
-const tileContainer = clsx(
-  'grid',
-  'gap-4',
-  'grid-cols-3',
-  'grid-rows-3',
-  'mx-auto',
-  'my-auto',
-  'p-4'
-);
-
-const tile = clsx('bg-palette-a', 'rounded-full');
-
-const score = clsx('text-right');
-
-const header = clsx('px-8', 'py-2', 'flex', 'justify-between', 'bg-palette-c');
-
-interface PropsType {
-  difficulty: Accessor<DifficultiesValue>;
-  tries: Accessor<number>;
-  setTries: Setter<number>;
-  score: Accessor<number>;
-  setScore: Setter<number>;
-}
+import { difficulties, rechargeTime, tiles } from '../utils/utils';
+import { AMOUNT_OF_TRIES } from '../utils/consts';
+import useWindowSize from '../utils/useWindowSize';
+import { useAppContext } from '../stores/AppContext';
 
 const { windowSize } = useWindowSize();
 const isVertical = windowSize().height > windowSize().width;
 
-const Game: Component<PropsType> = (props) => {
+const Game: Component = () => {
+  const { tries, setTries, difficulty, score, setScore } = useAppContext();
+
   const [activeTile, setActiveTile] = createSignal(-1);
   const [wasClicked, setWasClicked] = createSignal(false);
 
@@ -52,14 +30,14 @@ const Game: Component<PropsType> = (props) => {
         setActiveTile(-1);
         // if someone scored - don't increase the tries, it was done in tileOnClick
         if (!wasClicked()) {
-          props.setTries((tries) => tries + 1);
+          setTries((tries) => tries + 1);
         } else {
           setWasClicked(false);
         }
-      }, Number(props.difficulty()));
-    }, rechargeTime[props.difficulty()]);
+      }, Number(difficulty()));
+    }, rechargeTime[difficulty()!]);
 
-    if (props.tries() === AMOUNT_OF_TRIES) {
+    if (tries() === AMOUNT_OF_TRIES) {
       clearInterval(interval);
     }
 
@@ -68,30 +46,40 @@ const Game: Component<PropsType> = (props) => {
 
   const tileOnClick = (tileValue: Accessor<number>) => {
     if (tileValue() === activeTile()) {
-      props.setScore((score) => score + 1);
-      props.setTries((tries) => tries + 1);
+      setScore((score) => score + 1);
+      setTries((tries) => tries + 1);
       setWasClicked(true);
     }
     setActiveTile(-1);
   };
 
   const selectedDiff = () =>
-    difficulties.find((d) => d.value === props.difficulty())?.label;
+    difficulties.find((d) => d.value === difficulty())?.label;
 
   return (
     <>
-      <header class={header}>
+      <header
+        class={clsx('px-8', 'py-2', 'flex', 'justify-between', 'bg-palette-c')}
+      >
         <div>
           <p class={'font-bold'}>Difficulty</p>
           {selectedDiff()}
         </div>
-        <div class={score}>
+        <div class={clsx('text-right')}>
           <p class={'font-bold'}>Score</p>
-          {props.score()} / {props.tries()}
+          {score()} / {tries()}
         </div>
       </header>
       <div
-        class={tileContainer}
+        class={clsx(
+          'grid',
+          'gap-4',
+          'grid-cols-3',
+          'grid-rows-3',
+          'mx-auto',
+          'my-auto',
+          'p-4'
+        )}
         style={{
           width: isVertical ? '100%' : `${windowSize().height - 64}px`,
           height: isVertical ? `${windowSize().width}px` : '100%',
@@ -101,7 +89,11 @@ const Game: Component<PropsType> = (props) => {
           {(tileValue) => (
             <div
               onClick={() => tileOnClick(tileValue)}
-              class={clsx(tile, tileValue() === activeTile() && 'bg-palette-d')}
+              class={clsx(
+                'bg-palette-a',
+                'rounded-full',
+                tileValue() === activeTile() && 'bg-palette-d'
+              )}
             />
           )}
         </Index>
