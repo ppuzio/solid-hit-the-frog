@@ -24,14 +24,7 @@ const [difficulty, setDifficulty] = createSignal<
 const [tries, setTries] = createSignal(0);
 const [score, setScore] = createSignal<number>(0);
 
-const AppContext = createContext<StoreProvider>({
-  tries: tries,
-  setTries: setTries,
-  score: score,
-  setScore: setScore,
-  difficulty: difficulty,
-  setDifficulty: setDifficulty,
-});
+const AppContext = createContext<StoreProvider | undefined>(undefined);
 
 interface PropsType {
   children: JSX.Element;
@@ -46,5 +39,11 @@ export function AppProvider(props: PropsType) {
 }
 
 export function useAppContext() {
-  return useContext(AppContext);
+  const ctx = useContext(AppContext);
+
+  if (!ctx) {
+    throw new Error('Component beyond the reach of AppContext');
+  }
+
+  return ctx;
 }
