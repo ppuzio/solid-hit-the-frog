@@ -1,5 +1,6 @@
 ## Usage
-I'm using `yarn` to manage dependencies, but feel free to use any manager that you wish. 
+
+I'm using `yarn` to manage dependencies, but feel free to use any manager that you wish.
 
 ## Available Scripts
 
@@ -11,7 +12,6 @@ Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits. Currently no backend is connected yet - so all mechanisms are browser side. Backend implementation is in progress.<br>
-
 
 ### `yarn build` (or `npm run build` for npm users)
 

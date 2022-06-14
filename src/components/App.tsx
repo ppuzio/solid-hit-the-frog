@@ -12,9 +12,7 @@ const App: Component = () => {
 
   return (
     <>
-      <div
-        class={clsx('w-full', 'h-screen', 'bg-palette-b', 'flex', 'flex-col')}
-      >
+      <div class={clsx('w-full', 'h-screen', 'bg-palette-b', 'flex', 'flex-col')}>
         <Show when={difficulty() !== undefined} fallback={<Intro />}>
           <Game />
         </Show>

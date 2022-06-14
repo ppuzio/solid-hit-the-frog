@@ -8,21 +8,13 @@ export const DifficultySelect = () => {
     <select
       value={undefined}
       onChange={(e) => {
-        setDifficulty(
-          difficulties[
-            (e.target as EventTarget & HTMLSelectElement).selectedIndex - 1
-          ].value
-        );
+        setDifficulty(difficulties[(e.target as EventTarget & HTMLSelectElement).selectedIndex - 1].value);
         setScore(0);
         setTries(0);
       }}
     >
-      <option style="display:none" />
-      <For each={difficulties}>
-        {(difficulty) => (
-          <option value={difficulty.value}>{difficulty.label}</option>
-        )}
-      </For>
+      <option style={{ display: 'none' }} />
+      <For each={difficulties}>{(difficulty) => <option value={difficulty.value}>{difficulty.label}</option>}</For>
     </select>
   );
 };

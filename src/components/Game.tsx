@@ -1,11 +1,4 @@
-import {
-  Accessor,
-  Component,
-  createEffect,
-  createSignal,
-  Index,
-  onCleanup,
-} from 'solid-js';
+import { Accessor, Component, createEffect, createSignal, Index, onCleanup } from 'solid-js';
 
 import clsx from 'clsx';
 import { difficulties, rechargeTime, tiles } from '../utils/utils';
@@ -53,14 +46,11 @@ const Game: Component = () => {
     setActiveTile(-1);
   };
 
-  const selectedDiff = () =>
-    difficulties.find((d) => d.value === difficulty())?.label;
+  const selectedDiff = () => difficulties.find((d) => d.value === difficulty())?.label;
 
   return (
     <>
-      <header
-        class={clsx('px-8', 'py-2', 'flex', 'justify-between', 'bg-palette-c')}
-      >
+      <header class={clsx('px-8', 'py-2', 'flex', 'justify-between', 'bg-palette-c')}>
         <div>
           <p class={'font-bold'}>Difficulty</p>
           {selectedDiff()}
@@ -71,15 +61,7 @@ const Game: Component = () => {
         </div>
       </header>
       <div
-        class={clsx(
-          'grid',
-          'gap-4',
-          'grid-cols-3',
-          'grid-rows-3',
-          'mx-auto',
-          'my-auto',
-          'p-4'
-        )}
+        class={clsx('grid', 'gap-4', 'grid-cols-3', 'grid-rows-3', 'mx-auto', 'my-auto', 'p-4')}
         style={{
           width: isVertical ? '100%' : `${windowSize().height - 64}px`,
           height: isVertical ? `${windowSize().width}px` : '100%',
@@ -89,11 +71,7 @@ const Game: Component = () => {
           {(tileValue) => (
             <div
               onClick={() => tileOnClick(tileValue)}
-              class={clsx(
-                'bg-palette-a',
-                'rounded-full',
-                tileValue() === activeTile() && 'bg-palette-d'
-              )}
+              class={clsx('bg-palette-a', 'rounded-full', tileValue() === activeTile() && 'bg-palette-d')}
             />
           )}
         </Index>

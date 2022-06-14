@@ -1,6 +1,5 @@
 import { createEffect, createSignal } from 'solid-js';
 
-
 const useWindowSize = () => {
   const [windowSize, setWindowSize] = createSignal({
     width: window.innerWidth,

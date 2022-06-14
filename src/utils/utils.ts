@@ -1,7 +1,8 @@
 export const tiles = new Array(9).fill(null).map((_, i) => i);
 
-type ArrayElement<ArrayType extends readonly unknown[]> =
-  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[]
+  ? ElementType
+  : never;
 
 export const difficulties = [
   { value: '1500', label: 'Easy - 1.5s, new every 5s' },

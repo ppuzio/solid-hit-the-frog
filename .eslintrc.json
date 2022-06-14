@@ -3,12 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:solid/typescript",
-    "plugin:import/recommended",
-    "plugin:import/typescript"
-  ],
+  "extends": ["eslint:recommended", "plugin:solid/typescript", "plugin:import/recommended", "plugin:import/typescript"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {

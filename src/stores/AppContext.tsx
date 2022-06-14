@@ -1,11 +1,4 @@
-import {
-  createSignal,
-  createContext,
-  useContext,
-  JSX,
-  Accessor,
-  Setter,
-} from 'solid-js';
+import { createSignal, createContext, useContext, JSX, Accessor, Setter } from 'solid-js';
 import { DifficultiesValue } from '../utils/utils';
 
 interface StoreProvider {
@@ -17,9 +10,7 @@ interface StoreProvider {
   setDifficulty: Setter<DifficultiesValue | undefined>;
 }
 
-const [difficulty, setDifficulty] = createSignal<
-  DifficultiesValue | undefined
->();
+const [difficulty, setDifficulty] = createSignal<DifficultiesValue | undefined>();
 
 const [tries, setTries] = createSignal(0);
 const [score, setScore] = createSignal<number>(0);
@@ -33,9 +24,7 @@ interface PropsType {
 export function AppProvider(props: PropsType) {
   const store = { tries, setTries, score, setScore, difficulty, setDifficulty };
 
-  return (
-    <AppContext.Provider value={store}>{props.children}</AppContext.Provider>
-  );
+  return <AppContext.Provider value={store}>{props.children}</AppContext.Provider>;
 }
 
 export function useAppContext() {
