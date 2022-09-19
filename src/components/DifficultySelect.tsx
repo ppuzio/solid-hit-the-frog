@@ -1,9 +1,11 @@
 import { For } from 'solid-js';
-import { useAppContext } from '../stores/AppContext';
+import { scoreSignal, difficultySignal, triesSignal } from '../stores/AppContext';
 import { difficulties } from '../utils/utils';
 
 export const DifficultySelect = () => {
-  const { setDifficulty, setScore, setTries } = useAppContext();
+  const [, setDifficulty] = difficultySignal;
+  const [, setScore] = scoreSignal;
+  const [, setTries] = triesSignal;
   return (
     <select
       value={undefined}

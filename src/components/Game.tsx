@@ -4,13 +4,15 @@ import clsx from 'clsx';
 import { difficulties, rechargeTime, tiles } from '../utils/utils';
 import { AMOUNT_OF_TRIES } from '../utils/consts';
 import useWindowSize from '../utils/useWindowSize';
-import { useAppContext } from '../stores/AppContext';
+import { difficultySignal, scoreSignal, triesSignal } from '../stores/AppContext';
 
 const { windowSize } = useWindowSize();
 const isVertical = windowSize().height > windowSize().width;
 
 const Game: Component = () => {
-  const { tries, setTries, difficulty, score, setScore } = useAppContext();
+  const [tries, setTries] = triesSignal;
+  const [difficulty] = difficultySignal;
+  const [score, setScore] = scoreSignal;
 
   const [activeTile, setActiveTile] = createSignal(-1);
   const [wasClicked, setWasClicked] = createSignal(false);

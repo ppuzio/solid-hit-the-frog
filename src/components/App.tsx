@@ -5,11 +5,11 @@ import Intro from './Intro';
 import Game from './Game';
 import GameOverModal from './GameOverModal';
 import { AMOUNT_OF_TRIES } from '../utils/consts';
-import { AppProvider, useAppContext } from '../stores/AppContext';
+import { difficultySignal, triesSignal } from '../stores/AppContext';
 
 const App: Component = () => {
-  const { difficulty, tries } = useAppContext();
-
+  const [difficulty] = difficultySignal;
+  const [tries] = triesSignal;
   return (
     <>
       <div class={clsx('w-full', 'h-screen', 'bg-palette-b', 'flex', 'flex-col')}>
@@ -24,10 +24,4 @@ const App: Component = () => {
   );
 };
 
-const AppWithProvider = () => (
-  <AppProvider>
-    <App />
-  </AppProvider>
-);
-
-export default AppWithProvider;
+export default App;

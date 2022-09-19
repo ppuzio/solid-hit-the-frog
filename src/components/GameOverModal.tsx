@@ -2,24 +2,25 @@ import { Component, createSignal, onMount, Show } from 'solid-js';
 
 import clsx from 'clsx';
 import { AMOUNT_OF_TRIES } from '../utils/consts';
-import { useAppContext } from '../stores/AppContext';
+import { difficultySignal, scoreSignal } from '../stores/AppContext';
 import { DifficultySelect } from './DifficultySelect';
 
 const [isHighScore, setIsHighScore] = createSignal(false);
 
 const GameOverModal: Component = () => {
-  const store = useAppContext();
+  const [score] = scoreSignal;
+  const [difficulty] = difficultySignal;
 
   const [difficultyHighScore, setDifficultyHighScore] = createSignal('0');
 
   onMount(() => {
-    const highScoreFromStorage = localStorage.getItem(`high-score-${store.difficulty()}`);
+    const highScoreFromStorage = localStorage.getItem(`high-score-${difficulty()}`);
 
     highScoreFromStorage && setDifficultyHighScore(highScoreFromStorage);
 
-    if (Number(highScoreFromStorage) < store.score()) {
+    if (Number(highScoreFromStorage) < score()) {
       setIsHighScore(true);
-      localStorage.setItem('high-score-' + store.difficulty(), `${store.score()}`);
+      localStorage.setItem('high-score-' + difficulty(), `${score()}`);
     }
   });
 
@@ -44,7 +45,7 @@ const GameOverModal: Component = () => {
         <h2 class={clsx('mt-2', 'flex', 'gap-1')}>
           <p>Your score:</p>
           <p class={clsx('font-semibold')}>
-            {store.score()} / {AMOUNT_OF_TRIES}
+            {score()} / {AMOUNT_OF_TRIES}
           </p>
         </h2>
         <Show
